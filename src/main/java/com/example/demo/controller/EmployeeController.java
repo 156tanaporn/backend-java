@@ -22,7 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterReturnValueHandler;
 
 import com.example.demo.model.Employee;
+import com.example.demo.model.Role;
+import com.example.demo.model.Skill;
 import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.RoleRepository;
+import com.example.demo.repository.SkillRepository;
 
 import ch.qos.logback.core.joran.conditional.ElseAction;
 import jakarta.websocket.server.PathParam;
@@ -34,6 +38,13 @@ public class EmployeeController {
 	EmployeeRepository employeeRepository;
 	
 	private List<Employee> data =  new ArrayList<Employee>(); 
+	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@Autowired
+	SkillRepository skillRepository;
+	
 	
 	@GetMapping("/employee")
 	public ResponseEntity<Object> getEmployee() {
@@ -59,8 +70,17 @@ public class EmployeeController {
            
 		try {
 			
+			  Optional<Role> role = roleRepository.findById(4);
+			  body.setRole(role.get());
+			  
+			 
 			  Employee employee = employeeRepository.save(body);
 			 
+			  for(Skill skill : body.getSkills()) {
+				  skill.setEmployee(employee);
+				  
+				  skillRepository.save(skill);
+			  }
 			  return new ResponseEntity<>(employee, HttpStatus.CREATED);
 			
 			

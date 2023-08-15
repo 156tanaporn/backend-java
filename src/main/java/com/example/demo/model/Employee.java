@@ -1,9 +1,14 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +23,28 @@ public class Employee {
 	private String lastName;
 	private Integer salary;
 	
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
+	
+	@OneToMany
+	@JoinColumn(name = "employee_id")
+	private List<Skill> skills;
+
+
+	
+	public List<Skill> getSkills() {
+		return skills;
+	}
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -51,6 +78,7 @@ public class Employee {
 	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
+	
 	
 	
 	
