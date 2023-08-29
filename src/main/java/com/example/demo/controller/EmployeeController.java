@@ -1,17 +1,12 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitterReturnValueHandler;
 
 import com.example.demo.model.Employee;
 import com.example.demo.model.Role;
@@ -27,9 +21,6 @@ import com.example.demo.model.Skill;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.SkillRepository;
-
-import ch.qos.logback.core.joran.conditional.ElseAction;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 public class EmployeeController {
